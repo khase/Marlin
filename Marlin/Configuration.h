@@ -137,7 +137,7 @@
 #define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.0
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -376,9 +376,9 @@
   //#define  DEFAULT_Kd 86.0
   
   // Measured with M303 E0 S200 C8
-  #define  DEFAULT_Kp 17.18
-  #define  DEFAULT_Ki 0.95
-  #define  DEFAULT_Kd 77.77
+  #define  DEFAULT_Kp 14.35
+  #define  DEFAULT_Ki 0.71
+  #define  DEFAULT_Kd 72.87
 
 #endif // PIDTEMP
 
@@ -540,7 +540,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 102 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 100 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -631,13 +631,13 @@
  * Use G29 repeatedly, adjusting the Z height at each point with movement commands
  * or (with LCD_BED_LEVELING) the LCD controller.
  */
-//#define PROBE_MANUALLY
+#define PROBE_MANUALLY
 
 /**
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-#define FIX_MOUNTED_PROBE
+//#define FIX_MOUNTED_PROBE
 
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
@@ -660,8 +660,8 @@
  * These options are most useful for the BLTouch probe, but may also improve
  * readings with inductive probes and piezo sensors.
  */
-#define PROBING_HEATERS_OFF       // Turn heaters off when probing
-#define PROBING_FANS_OFF          // Turn fans off when probing
+//#define PROBING_HEATERS_OFF       // Turn heaters off when probing
+//#define PROBING_FANS_OFF          // Turn fans off when probing
 //#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
 
 // A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
@@ -694,9 +694,9 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-#define X_PROBE_OFFSET_FROM_EXTRUDER -25   // X offset: -left  +right  [of the nozzle]
-#define Y_PROBE_OFFSET_FROM_EXTRUDER -45   // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0.5   // Z offset: -below +above  [the nozzle]
+#define X_PROBE_OFFSET_FROM_EXTRUDER 0   // X offset: -left  +right  [of the nozzle]
+#define Y_PROBE_OFFSET_FROM_EXTRUDER 0   // Y offset: -front +behind [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 6000
@@ -779,7 +779,7 @@
 
 //#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
 
-#define Z_HOMING_HEIGHT 5  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 10  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -791,16 +791,16 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 220
-#define Y_BED_SIZE 220
+#define X_BED_SIZE 210
+#define Y_BED_SIZE 210
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS -38
 #define Y_MIN_POS -10
-#define Z_MIN_POS 0
+#define Z_MIN_POS -5
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 220
+#define Z_MAX_POS 200
 
 /**
  * Software Endstops
@@ -1047,9 +1047,9 @@
 
 #if ENABLED(Z_SAFE_HOMING)
   //#define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axis (G28).
-  #define Z_SAFE_HOMING_X_POINT (-5)    // X point for Z homing when homing all axis (G28).
+  #define Z_SAFE_HOMING_X_POINT (-10)    // X point for Z homing when homing all axis (G28).
   //#define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axis (G28).
-  #define Z_SAFE_HOMING_Y_POINT (10)    // Y point for Z homing when homing all axis (G28).
+  #define Z_SAFE_HOMING_Y_POINT (-10)    // Y point for Z homing when homing all axis (G28).
 #endif
 
 // Homing speeds (mm/m)
@@ -1164,7 +1164,7 @@
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED     90
+#define PREHEAT_2_TEMP_BED     75
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 /**
@@ -1391,7 +1391,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-//#define REVERSE_ENCODER_DIRECTION
+#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
@@ -1406,7 +1406,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
